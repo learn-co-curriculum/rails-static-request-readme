@@ -1,0 +1,1 @@
+# rails-static-request-readme
