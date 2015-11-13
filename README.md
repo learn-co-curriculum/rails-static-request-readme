@@ -17,7 +17,7 @@ Objectives
 
 Should explain that every URL that we want our application to handle must map to a specific controller and action.
 
-When a request comes into our application, our router must pick a controller and a method in that controller that is responsible for generating a response.
+When a request comes into our application, our router must pick a controller and a method in that controller that is responsible for generating a response. We've taught a lot of this in Sinatra so it can be a bit light here.
 
 Use the example of how we want to have an 'about' page on our site. So let's try to go there, let's just type localhost:3000/about.
 
