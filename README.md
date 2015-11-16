@@ -1,54 +1,91 @@
 # Rails Static Request
 
-Objectives
+## Routing
 
-1. Define the purposes of routing, the mapping between an HTTP request and a specific controller action in your application.
-2. Identify route errors from Rails (going to a url with no route) and how to solve it (by drawing a route)
-3. Draw a route with get, mapping a url to a controller action
-4. Create a new controller by hand and inherit from application controller
-5. Define a controller action by defining a method in a controller
-6. Identify missing template errors from Rails (going to an action with no template) and how to solve it (by creating a template)
-7. Use render to explicity render a template
-8. Define the Reails implicit rendering convention
-9. Define the steps required to create a static request
+How does your application know what view to render to users? This is where routing comes in, as a framework Rails has a comprehensive routing system for both dynamic and static pages. Below are the differences between a static and dynamic route:
 
+* **Static route** - A static route will render a view that does not change, you typically will not send parameters to it, examples would be: a site's about or contact pages.
+* **Dynamic route** - Dynamic routes are pages that accept parameters and render different content based on those parameters, an example would be: a blog's post page that contains a specific article.
 
-## Notes
+In this lesson we are going to specifically cover static pages to ensure that you can get a firm understanding of how routing works in a Rails application.
 
-Should explain that every URL that we want our application to handle must map to a specific controller and action.
+Before we dive into the code and routing configurations, it helps to know how HTTP works at a high level. Below is the flow that takes place when a user attempts to go to a page on a Rails application:
 
-When a request comes into our application, our router must pick a controller and a method in that controller that is responsible for generating a response. We've taught a lot of this in Sinatra so it can be a bit light here.
+1. A URL is entered into the browser, this is the HTTP request
+2. That request is sent to the server where the application's router interprets the request and sends a message to the controller mapped to that route
+3. The controller communicates with the view file mapped to the controller method
+4. The server returns that HTTP response, which contains the view and page that can be viewed in the browser
 
-Use the example of how we want to have an 'about' page on our site. So let's try to go there, let's just type localhost:3000/about.
+## Implementing a Static Route
 
-We get a routing error. Let's draw the route.
+Let's try this out in our application, I'm going to continue using the ```blog-flash``` application that I walked through in the Rails Basic lesson.
 
-Let's draw a simple route, like /about. Let's have that map to a StaticController and an about action (though don't create that controller). Reload the page. No more routing error, now it can't find the controller.
+To begin, startup the rails server and go to ```localhost:3000/about``` as you will see this throws a routing error: ```No route matches [GET] "/about"```, to fix this, stop the rails server by pressing ```control + c``` (anytime you make a routing change you need to restart the rails server)
 
-Let's make a new controller, no generators, with touch app/controllers/static_controller.rb.
+Now draw the route by opening the ```config/routes.rb``` file and add the following route inside of the ```draw``` block:
 
-Controllers need to inherit from ApplicationController and explain briefly the controller naming convention.
+```ruby
+get 'about', to: 'static#about'
+````
 
-Define our first controller action as a method, def about.
+Now start the rails server back up and go back to ```localhost:3000/about``` and click refresh, you should now see that the error message has changed, it's no longer complaining about not having a route, the error should now say: ```uninitialized constant StaticController```
 
-Let's hit refresh. Now it complains about a view.
+Let's fix this by creating a new controller for our static pages, you can do this manually by running the following command in the terminal:
 
-Controller actions are responsible for determining what the response is - responses are built by views.
+```touch app/controllers/static_controller.rb```
 
-For some reason we'll discuss briefly, rails is looking for a view in a very specific place. lets just make it happy and build our view in views/static/about.html.erb.
+This will create a blank controller file that we can use to map to the routing file. Since there are a number of methods built into the Rails controller system, you will also want the controller to inherit from the application controller. The new file should have code that looks like this:
 
-Let's just put some basic HTML there.
+```ruby
+class StaticController < ApplicationController
+end
+```
 
-Okay, now everything works.
+The standard naming convention for controllers is the name of the controller followed by the word ```controller```.
 
-Let's make this rendering process of choosing a view a little more explicit using the rails render method (equiv to sinatra's erb method if you're familair with it).
+If you refresh the browser now you will see a new error: ```The action 'about' could not be found for StaticController```
 
-Render can accept a string that points to a view template relative to 'views', so we can use render 'static/about'. If you think about it, that's a great place to put a view that relates to the about action in the static controller. In fact, it's such a reasonable ad convineinent place to put it that rails actually assumes, given no other render instructions, that's where you want to put it. This is a big principal in rails, convention over configuration. That's why our action worked without a render call. As a beginner we believe being explicit is easier at first then being implicit, learn the conventions and then use them.
+We're making good progress (even though we're using EDD - error driven development), and it's good to see each of the errors so that when you encounter these in your real world projects you will know how to fix them. This current error is fixed by adding the following method in the static controller:
 
-And like that we've created our first rails request - it's a static request, no data is being used, no matter what, everytime we load our about page it will be exactly the same. there is nothing dynamic about it. But that teaches us the general methodology of responding to a request with rails.
+```ruby
+def about
+end
+```
 
-draw a route.
-map it to a controller action.
-program the action
-create a template to render
-render that template.
+Hitting refresh in the browser will give you a 'Template is missing' error, specifically it says: ```Missing template static/about...```
+
+We're very close to getting our view to show up, but before we make our final addition it's important to understand the difference between explicit and implicit rendering for the views. Rails gives us two options for how views are mapped between the controller and view files:
+
+* **Explicit rendering** - for explicit rendering, Rails lets you dictate what view file that you want to have the controller action mapped to.
+* **Implicit rendering** - for implicit rendering, Rails follows a standard convention that automatically looks for the view file with the same name as the controller action.
+
+First let's try out explicit rendering, create a new directory in the view's directory called ```static``` and create a new file called ```some_page.html.erb```. In that file add some basic HTML code, such as:
+
+```html
+<h1>Hello from some page</h1>
+```
+
+Inside the ```about``` method in the controller add the following code:
+
+```render "static/some_page"``` you can also use: ```render "some_page"``` (Rails will automatically look inside the view directory with the same name as the controller, but you can also give the full view path).
+
+If you refresh the ```/about``` page in the browser you will see our heading of **Hello from some page**
+
+To compare that with how Rails utilizes implicit view rendering, create a new file in the static view directory called: ```about.html.erb``` and add some HTML code such as:
+
+```html
+<h1>Hello from the about page</h1>
+```
+
+Now in the controller, remove the ```render``` call completely. If you go and refresh the browser you will now see **Hello from the about page**.
+
+So is explicit or implicit better? Typically you will discover that you will want to utilize the implicit workflow in your day to day coding practice, the rationale is quite practical. Imagine that you are taking over a legacy Rails project, as you are getting acclimated to the code, would you prefer that the previous dev followed a standard naming process or would you rather be forced to looking through each controller code to see how the controller actions were mapped to the views? Rails has always had the goal of making the development process as efficient as possible, which is why it is typically best to follow these types of implicit procedures. With that being said, it is important to understand how the views are mapped to the controller, which is why we walked through the explicit process.
+
+## Summary
+
+In summary, you should now have a firm understanding of how to implement basic routing in your application for static pages, as a review, the process is below:
+
+1. The server receives an HTML request from the client
+2. The application processes the request through the route file
+3. The route file maps the request through whatever controller method is called
+4. The controller then responds with the view that belongs to that specific method and delivers it to the client
