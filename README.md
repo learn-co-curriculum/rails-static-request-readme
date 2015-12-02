@@ -52,3 +52,5 @@ map it to a controller action.
 program the action
 create a template to render
 render that template.
+
+<a href='https://learn.co/lessons/rails-static-request-readme' data-visibility='hidden'>View this lesson on Learn.co</a>
