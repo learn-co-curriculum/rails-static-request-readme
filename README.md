@@ -36,7 +36,7 @@ Let's look at the components that makeup this route code:
 
 * The path - `about` represents the path in the URL bar that the route will be mapped to
 
-* The controller action - `static#about` tells the Rails routing system that this route should be passed through the `static` controller's `about` action
+* The controller action - `static#about` tells the Rails routing system that this route should be passed through the `static` controller's `about` action. If the term `action` sounds foreign, actions are just ruby speak for a method in a controller. So in the `StaticController` will be a method called about that gets called when a user goes to `/about`
 
 Now start the rails server back up and go back to ```localhost:3000/about``` and click refresh, you should now see that the error message has changed, it's no longer complaining about not having a route, the error should now say: ```uninitialized constant StaticController```
 
