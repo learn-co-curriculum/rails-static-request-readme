@@ -4,19 +4,19 @@
 
 ## Routing
 
-How does your application know what view to render to users? This is where routing comes in, as a framework Rails has a comprehensive routing system for both dynamic and static pages. Below are the differences between a static and dynamic route:
+How does your application know what view to render to users? This is where routing comes in. As a framework, Rails has a comprehensive routing system for both dynamic and static pages. Below are the differences between a static and dynamic route:
 
-* **Static route** - A static route will render a view that does not change, you typically will not send parameters to it, examples would be: a site's about or contact pages.
-* **Dynamic route** - Dynamic routes are pages that accept parameters and render different content based on those parameters, an example would be: a blog's post page that contains a specific article.
+* **Static route** - A static route will render a view that does not change, you typically will not send parameters to it. Examples would be a site's about or contact pages.
+* **Dynamic route** - Dynamic routes are pages that accept parameters and render different content based on those parameters. An example would be a blog's post page that contains a specific article.
 
-In this lesson we are going to specifically cover static pages to ensure that you can get a firm understanding of how routing works in a Rails application.
+In this lesson we're going to specifically cover static pages to ensure that you can get a firm understanding of how routing works in a Rails application.
 
 Before we dive into the code and routing configurations, it helps to know how HTTP works at a high level. Below is the flow that takes place when a user attempts to go to a page on a Rails application:
 
 1. A URL is entered into the browser, this is the HTTP request
 2. That request is sent to the server where the application's router interprets the request and sends a message to the controller mapped to that route
 3. The controller communicates with the view file mapped to the controller method
-4. The server returns that HTTP response, which contains the view and page that can be viewed in the browser
+4. The server returns that HTTP response, which contains the view page that can be viewed in the browser
 
 ## Implementing a Static Route
 
@@ -40,9 +40,7 @@ Let's look at the components that makeup this route code:
 
 Now start the rails server back up and go back to ```localhost:3000/about``` and click refresh, you should now see that the error message has changed, it's no longer complaining about not having a route, the error should now say: ```uninitialized constant StaticController```
 
-Let's fix this by creating a new controller for our static pages, add a new file to the application:
-
-```app/controllers/static_controller.rb```
+Let's fix this by creating a new controller for our static pages, add a new file to the application: `app/controllers/static_controller.rb`
 
 This will create a blank controller file that we can use to map to the routing file. Since there are a number of methods built into the Rails controller system, you will also want the controller to inherit from the application controller. The new file should have code that looks like this:
 
