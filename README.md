@@ -22,6 +22,9 @@ Before we dive into the code and routing configurations, it helps to know how HT
 
 Let's try this out in our application, I'm going to use a blogging application as a case study in this lesson.
 
+Got an error undefined method `lookup_asset_for_path' for #<#<Class:0x007fba54a9dce0>:0x007fba57b66de0> when trying to view in browser. Advise that people be informed either to create a rails new without scaffolding, or if they're using the scaffolded app from before, that they comment out the gems, better_errors and sprockets_better_errors, courtesy of Leigh Scherrer 
+
+
 To begin, startup the rails server and go to ```localhost:3000/about``` as you will see this throws a routing error: ```No route matches [GET] "/about"```, to fix this, stop the rails server by pressing ```control + c``` (anytime you make a routing change you need to restart the rails server)
 
 Now draw the route by opening the ```config/routes.rb``` file and add the following route inside of the ```draw``` block:
@@ -85,6 +88,8 @@ end
 
 If you refresh the `/about` page in the browser you will see our heading of **Hello from some page**
 
+Here's where I got the error
+
 To compare that with how Rails utilizes implicit view rendering, create a new file in the static view directory called: `about.html.erb` and add some HTML code such as:
 
 ```html
@@ -105,3 +110,5 @@ In summary, you should now have a firm understanding of how to implement basic r
 2. The application processes the request through the route file
 3. The route file maps the request through whatever controller method is called
 4. The controller then responds with the view that belongs to that specific method and delivers it to the client
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/rails-static-request-readme'>Rails Static Request</a> on Learn.co and start learning to code for free.</p>
