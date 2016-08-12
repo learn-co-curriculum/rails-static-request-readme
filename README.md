@@ -1,7 +1,5 @@
 # Rails Static Request
 
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/rails-static-request-readme' title='Rails Static Request'>Rails Static Request</a> on Learn.co and start learning to code for free.</p>
-
 ## Routing
 
 How does your application know what view to render to users? This is where routing comes in. As a framework, Rails has a comprehensive routing system for both dynamic and static pages. Below are the differences between a static and dynamic route:
