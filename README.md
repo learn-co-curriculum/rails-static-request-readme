@@ -75,7 +75,7 @@ Inside the `about` method in the controller add the following code: `render "sta
 
 ```ruby
 def about
-  render "static/some_page"
+  render "some_page"
 end
 ```
 
