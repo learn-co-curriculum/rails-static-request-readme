@@ -104,6 +104,6 @@ In summary, you should now have a firm understanding of how to implement basic r
 
 ## Video Review
 
-* [Intro to Rails](https://github.com/learn-co-curriculum/rails-video-review-intro-to-rails)
+* [Intro to Rails](https://www.youtube.com/watch?v=KKQ8lpEyw2g)
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/rails-static-request-readme'>Rails Static Request</a> on Learn.co and start learning to code for free.</p>
