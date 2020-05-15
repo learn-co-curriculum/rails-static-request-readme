@@ -102,4 +102,26 @@ In summary, you should now have a firm understanding of how to implement basic r
 3. The route file maps the request through whichever controller method is called
 4. The controller then responds with the view that belongs to that specific method and delivers it to the client
 
+## PhantomJS Errors
+
+If you receive this error:
+
+`Could not find an executable ["phantomjs"] on your path.`
+
+You'll need to install PhantomJS on your computer before the tests will work. 
+
+For Mac users, run the following:
+
+```sh
+brew cask install phantomjs
+```
+
+For Windows users, run the following:
+
+```sh
+npm install -g phantomjs-prebuilt
+```
+
+You can confirm the installation has worked by running `phantomjs -v`.
+
 <p class='util--hide'>View <a href='https://learn.co/lessons/rails-static-request-readme'>Rails Static Request</a> on Learn.co and start learning to code for free.</p>
