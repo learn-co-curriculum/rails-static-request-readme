@@ -124,5 +124,4 @@ npm install -g phantomjs-prebuilt
 
 You can confirm the installation has worked by running `phantomjs -v`.
 
-
 <p class='util--hide'>View <a href='https://learn.co/lessons/rails-static-request-readme'>Rails Static Request</a> on Learn.co and start learning to code for free.</p>
