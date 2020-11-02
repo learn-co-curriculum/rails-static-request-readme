@@ -123,3 +123,11 @@ npm install -g phantomjs-prebuilt
 ```
 
 You can confirm the installation has worked by running `phantomjs -v`.
+
+## Puma Install Error
+
+If, when running `bundle install`, you get an error installing Puma, run the following:
+
+```sh
+gem install puma:4.3.5 -- --with-cflags="-Wno-error=implicit-function-declaration"
+```
