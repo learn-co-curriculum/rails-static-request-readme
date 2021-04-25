@@ -1,4 +1,4 @@
-# Rails Static Request
+# Rails Static Requests
 
 ## Routing
 
