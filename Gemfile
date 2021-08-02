@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.7.1'
+gem 'rails', '~> 5.2'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'sass-rails'
@@ -12,7 +12,6 @@ gem 'sqlite3', '~>1.3.6'
 gem 'rails-controller-testing'
 gem 'puma'
 gem 'turbolinks'
-gem 'phantomjs', :require => 'phantomjs/poltergeist'
 gem 'rb-readline'
 
 group :development, :test do
